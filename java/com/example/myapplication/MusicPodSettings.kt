@@ -137,8 +137,7 @@ class MusicPodSettings(settingsPref: SharedPreferences) : ViewModel() {
         val gson = GsonBuilder().create()
         return gson.fromJson(serializedList, trackType)
     }
-
-
+    
     private fun saveSettingInt(preferencesName: String, content: Int) : Int {
         val editor = prefs.edit()
         editor.putInt(preferencesName, content)
@@ -180,7 +179,7 @@ fun SettingsMainview(
     LazyColumn(
         Modifier.fillMaxSize(),
         state = rememberLazyListState(), // Pass the LazyListState to the LazyColumn
-         ) {
+    ) {
         item {
             GetPremiumVersion()
         }
@@ -364,7 +363,6 @@ fun CustomizeSetting(settings: MusicPodSettings){
         SettingOptionDisplayTop(
             text = "Theme",
             optionValue = settings.themeToString()) {
-
         }
         SettingOptionDisplayMiddle(text = "Text size", optionValue = textStyle.fontSize.value.toString()) {}
         SettingOptionDisplayMiddle(text = "Manage tabs") {}
@@ -417,7 +415,6 @@ fun SettingOptionDisplayTop(
                     isPressed = true
                 },
             verticalArrangement = Arrangement.SpaceEvenly
-
         ) {
             Text(
                 text = text,
@@ -522,15 +519,11 @@ fun SettingOptionDisplayWithToggle(
     mediaPlayerServiceConnection: MediaPlayerServiceConnection,
     optionValue: String = "",
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-)
-{
+){
     val textPadding by remember { mutableStateOf(20.dp) }
     val fontTitleMedium = MaterialTheme.typography.titleMedium
-
     val textColor = MaterialTheme.colorScheme.background
-
     val isPressed by remember { mutableStateOf(false) }
-
     val animatedAlpha by animateFloatAsState(
         targetValue = if (isPressed) 0f else 0.5f, label = "button animation"
     )
@@ -562,7 +555,6 @@ fun SettingOptionDisplayWithToggle(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
             )
-
         {
             Column(
                 //verticalArrangement = Arrangement.SpaceEvenly
@@ -605,9 +597,7 @@ fun SettingOptionDisplayBottom(
 {
     val textPadding by remember { mutableStateOf(20.dp) }
     val fontTitleMedium = MaterialTheme.typography.titleMedium
-
     val textColor = MaterialTheme.colorScheme.background
-
     var isPressed by remember { mutableStateOf(false) }
 
     // Use rememberUpdatedState to ensure the animation restarts when isPressed changes
@@ -667,21 +657,20 @@ fun SettingOptionDisplayBottom(
 @Composable
 fun SleepTimer(onNavigateToSongList :() ->Unit)
 {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(start = 2.dp, end = 2.dp)
-                .clip(RoundedCornerShape(20.dp))
-                .background(Color.Black.copy(0.5f))
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(start = 2.dp, end = 2.dp)
+            .clip(RoundedCornerShape(20.dp))
+            .background(Color.Black.copy(0.5f))
             //.background(MaterialTheme.colorScheme.background)
-        ) {
-            textWithCheckBox(text = "Off")
-            textWithCheckBox(text = "30 minutes")
-            textWithCheckBox(text = "1 hour")
-            textWithCheckBox(text = "1 hour 30 minutes")
-            textWithCheckBox(text = "2 hours")
-
-        }
+    ) {
+        textWithCheckBox(text = "Off")
+        textWithCheckBox(text = "30 minutes")
+        textWithCheckBox(text = "1 hour")
+        textWithCheckBox(text = "1 hour 30 minutes")
+        textWithCheckBox(text = "2 hours")
+    }
 }
 
 @Composable
@@ -699,16 +688,14 @@ fun textWithCheckBox(text:String){
         CircleCheckbox(selected = checkState, modifier = Modifier) {
             checkState = !checkState
         }
-            Text(
-                text = text,
-                color = MaterialTheme.colorScheme.background,
-                fontSize = fontStyle.fontSize
-            )
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.background,
+            fontSize = fontStyle.fontSize
+        )
     }
     HorizontalDivider(
-        Modifier
-        //.fillMaxSize()
-        .padding(start = 60.dp, end = 20.dp)
+        Modifier.padding(start = 60.dp, end = 20.dp)
         ,color = MaterialTheme.colorScheme.background.copy(0.5f)
     )
 }
